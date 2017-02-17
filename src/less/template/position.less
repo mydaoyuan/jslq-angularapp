@@ -1,0 +1,108 @@
+.info_box {
+  background: @defaultColor;
+  border-bottom: 1px solid @borderColor;
+  padding: 6px 15px;
+  overflow: hidden;
+  position: relative;
+  .info-item {
+    height: 30px;
+    line-height: 30px;
+    .fs(16);
+    span {
+      margin-right: 15px;
+    }
+    &:first-child {
+      span {
+        &:last-child {
+          color: red;
+        }
+      }
+    }
+  }
+  .star {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -20px;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.company {
+  background: #fff;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  display: flex;
+  border-bottom: 1px solid @borderColor;
+  .logo {
+    margin-right: 10px;
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .fs(16);
+  }
+}
+
+
+.position_class {
+  background: #fff;
+  overflow: hidden;
+  padding: 10px 15px;
+  .module_tit {
+    .fs(16);
+    font-weight: 600;
+  }
+  .classes {
+    margin-top: 30px;
+    a {
+      display: inline-block;
+      line-height: 20px;
+      height: 20px;
+      padding: 8px 12px;
+      min-width: 60px;
+      margin-right: 14px;
+      text-align: center;
+      border-radius: 18px;
+      background: #e2f7f6;
+      .fs(15);
+      color: #111;
+      &.active {
+        background: @themeColor;
+        color: #fff;
+      }
+    }
+  }
+  .positions {
+    border-top: 1px solid @borderColor;
+    margin-top: 10px;
+    .position_item {
+      display: flex;
+      height: 80px;
+      box-sizing: border-box;
+      padding: 10px 0;
+      justify-content: space-between;
+      align-items: center;
+      .fl {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
+        .fs(16);
+      }
+      .fr {
+        .fs(16);
+        color: red;
+      }
+    }
+  }
+}

@@ -32,6 +32,7 @@ gulp.task('json', function() {
 gulp.task('less', function() {
   gulp.src(app.srcPath + 'less/app.less')
     .pipe($.less())
+    .pipe($.autoprefixer())
     .pipe(gulp.dest(app.devPath + 'style'))
     .pipe($.cssmin())
     .pipe(gulp.dest(app.proPath + 'style'))
@@ -79,4 +80,4 @@ gulp.task('serve', function() {
   gulp.watch(app.srcPath + 'image/**/*.image', ['image']);
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['build', 'serve']);

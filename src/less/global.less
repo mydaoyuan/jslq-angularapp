@@ -7,7 +7,41 @@ html, body {
 body {
   background: #f4f4f4;
 }
-a, i {
+a, i, img {
   display: block;
   text-decoration: none;
+}
+.navbar {
+  height: 44px;
+  line-height: 44px;
+  .fs(18);
+  width: 100%;
+  background-color: @themeColor;
+  color: @defaultColor;
+  text-align: center;
+  position: relative;
+  .navbar-back {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 1rem;
+    .fs(22);
+  }
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: @themeColor;
+  a {
+    width: 100%;
+    height: 100%;
+    .fs(18);
+    line-height: 44px;
+    text-align: center;
+    color: @defaultColor;
+  }
 }

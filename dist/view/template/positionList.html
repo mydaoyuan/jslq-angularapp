@@ -1,0 +1,12 @@
+<div class="list-box">
+  <div ui-sref="position({id: item.id})" class="list-item" ng-repeat="item in mydata">
+    <div class="list-img">
+      <img ng-src="{{item.imageUrl}}" alt="">
+    </div>
+    <div class="list-desc">
+      <div class="list-title" ng-bind="item.job"></div>
+      <div class="list-subtitle" ng-bind="item.companyName+'['+item.cityName+']'+item.industryName"></div>
+      <div class="list-time" ng-bind="item.date"></div>
+    </div>
+  </div>
+</div>
