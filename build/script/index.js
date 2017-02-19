@@ -2,6 +2,18 @@
 
 angular.module('app', ['ui.router']);
 
+angular.module('app').value('dict', {}).run(['$http', 'dict', function($http, dict) {
+  $http.get('data/city.json').then(function(data) {
+    dict.city = data.data;
+  })
+  $http.get('data/salary.json').then(function(data) {
+    dict.salary = data.data;
+  })
+  $http.get('data/scale.json').then(function(data) {
+    dict.scale = data.data;
+  })
+}])
+
 'usr strict';
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -37,13 +49,11 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
 angular.module('app').controller('companyCtrl', ['$scope', '$http', '$state', '$timeout', function($scope, $http, $state, $timeout) {
   $http.get('data/company.json?'+$state.params.id).then(function(data) {
     $scope.company = data.data;
+    $scope.positionlist = $scope.company.positionClass[0].positionList;
   }).catch(function(err) {
 
   })
-
-  $timeout( function (){
-    $scope.positionlist = $scope.company.positionClass[0].positionList;
-  } , 0 , false);
+  $scope.name = 'hha'
 }])
 
 'use strict';
@@ -90,6 +100,67 @@ angular.module('app').controller('positionCtrl', ['$q', '$scope', '$http', '$sta
 
     })
   })
+}])
+
+'use strict';
+
+angular.module('app').controller('searchCtrl', ['$scope', '$http', 'dict', function($scope, $http, dict) {
+  $scope.name = '';
+  $scope.search = function() {
+    $http.get('data/positionList.json?name='+$scope.name).then(function(data) {
+      $scope.lists = data.data;
+    }).catch();
+  }
+  $scope.search();
+  $scope.list = [
+    {
+      id: 'city',
+      name: '城市'
+    },
+    {
+      id: 'salary',
+      name: '薪资'
+    },
+    {
+      id: 'scale',
+      name: '公司规模'
+    }
+  ]
+  var tabid = '';
+  $scope.click = function(id,name) {
+    tabid = id;
+    $scope.sheetlist = dict[id];
+    $scope.sheetshow = true;
+  }
+  $scope.filterObj = {};
+  $scope.sClick = function(id, name) {
+    if(id) {
+      angular.forEach($scope.list, function(item) {
+        if(item.id === tabid) {
+          item.name = name;
+        }
+      });
+      $scope.filterObj[tabid+'Id'] = id;
+    } else {
+      delete($scope.filterObj[tabid+'Id']);
+      angular.forEach($scope.list, function(item) {
+        if(item.id === tabid) {
+          switch (item.id) {
+            case "city":
+              item.name = "城市"
+              break;
+            case "salary":
+              item.name = "薪资"
+              break;
+            case "scale":
+              item.name = "公司规模"
+              break;
+            default:
+          }
+        }
+      })
+    }
+  }
 }])
 
 'use strict';
@@ -165,6 +236,26 @@ angular.module('app').directive('navbar', [function() {
 
 'use strict';
 
+angular.module('app').directive('picker', [function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    templateUrl: 'view/template/picker.html',
+    scope: {
+      list: '=',
+      isshow: '=',
+      selectpicker: '&'
+    },
+    link: function(scope) {
+      scope.hidesheet = function() {
+        scope.isshow = false;
+      }
+    }
+  }
+}])
+
+'use strict';
+
 angular.module('app').directive('positionClass', [function() {
   return {
     restrict: 'A',
@@ -173,12 +264,13 @@ angular.module('app').directive('positionClass', [function() {
     scope: {
       com: '=',
       isActive: '=',
-      initial: '='
+      initial: '=',
+      posi: '='
     },
     link: function(scope) {
       scope.showpositionlist = function(idx) {
         scope.isActive = idx;
-        scope.positionlist = scope.com.positionClass[idx].positionList;
+        scope.posi = scope.com.positionClass[idx].positionList;
       }
 
     }
@@ -193,7 +285,8 @@ angular.module('app').directive('appPositionlist', [function() {
     replace: true,
     templateUrl: 'view/template/positionList.html',
     scope: {
-      mydata: '='
+      mydata: '=',
+      filterObj: '='
     }
   }
 }]);
@@ -215,6 +308,36 @@ angular.module('app').directive('positionInfo', [function() {
     }
   }
 }]);
+
+'use strict';
+
+angular.module('app').directive('searchBar', [function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    templateUrl: 'view/template/searchBar.html'
+  }
+}])
+
+'use strict';
+
+angular.module('app').directive('tabbar', [function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    templateUrl: 'view/template/tabbar.html',
+    scope: {
+      list: '=',
+      tabClick: '&'
+    },
+    link: function(scope) {
+      scope.hclick = function(item) {
+        scope.tabid = item.id;
+        scope.tabClick(item);
+      }
+    }
+  }
+}])
 
 angular
   .module('app')
@@ -253,3 +376,21 @@ angular
         readAsDataUrl: readAsDataURL  
     };
 }]);
+
+angular.module('app').filter('filterByObj', [function() {
+  return function(list, obj) {
+    var result = [];
+    angular.forEach(list, function(item) {
+      var isEqual = true;
+      for(var e in obj) {
+        if(item[e] !== obj[e]) {
+          isEqual = false;
+        }
+      }
+      if(isEqual) {
+        result.push(item);
+      }
+    })
+    return result;
+  }
+}])

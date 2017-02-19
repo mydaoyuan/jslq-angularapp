@@ -1,0 +1,8 @@
+<div class="picker_mask" ng-show="isshow" ng-click="hidesheet();">
+  <div class="picker_modal">
+    <div class="picker_inner">
+      <div ng-click="selectpicker(item)" ng-repeat="item in list" class="picker_li" ng-bind="item.name"></div>
+    </div>
+    <div class="cancel" ng-click="hidesheet();">取消</div>
+  </div>
+</div>
