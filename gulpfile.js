@@ -72,7 +72,7 @@ gulp.task('serve', function() {
     port: 3007
   })
 
-  // console.log('http://localhost:3007');
+  open('http://localhost:3007');
 
   gulp.watch('bower_components/**/*', ['lib']);
   gulp.watch(app.srcPath + '**/*.html', ['html']);
