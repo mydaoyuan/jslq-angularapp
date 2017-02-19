@@ -266,6 +266,152 @@
   font-size: 0.42666667rem;
   color: red;
 }
+.search_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: #47b7d7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  box-sizing: border-box;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 15px;
+  font-size: 0.42666667rem;
+}
+.search_bar .cancel {
+  width: 80px;
+  color: #fff;
+  text-align: center;
+}
+.search_bar .search_icon {
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.search_bar .search_icon i {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url('/image/search-active.png') no-repeat center center;
+  background-size: 100% 100%;
+  margin-right: 3px;
+}
+.search_bar .search_input {
+  width: 180px;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.search_bar .search_input input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  font-size: 0.37333333rem;
+}
+.mt-s {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 44px;
+  top: 84px;
+}
+/**
+ * tabbar class
+**/
+.tabbar {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #e7e7e7;
+}
+.tabbar .tab_li {
+  width: 33%;
+  font-size: 0.42666667rem;
+  color: #676767;
+  text-align: center;
+  line-height: 40px;
+  box-sizing: border-box;
+  border-bottom: 2px solid transparent;
+}
+.tabbar .tab_li.active {
+  border-bottom: 2px solid #47b7d7;
+  color: #47b7d7;
+}
+.tabbar .tab_li:nth-child(2) {
+  width: 34%;
+}
+/**
+ * picker class
+**/
+.picker_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 999;
+}
+.picker_mask .picker_modal {
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 8px;
+}
+.picker_mask .picker_modal .picker_inner {
+  max-height: 200px;
+  overflow: scroll;
+  border-radius: 5px;
+  width: 100%;
+}
+.picker_mask .picker_modal .picker_inner .picker_li {
+  height: 40px;
+  background: #fff;
+  line-height: 40px;
+  text-align: center;
+  font-size: 0.48rem;
+  color: #8eb3e0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dedede;
+}
+.picker_mask .picker_modal .cancel {
+  width: 100%;
+  height: 40px;
+  margin-top: 8px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 0.48rem;
+  color: #8eb3e0;
+}
 html,
 body {
   padding: 0;
@@ -275,12 +421,19 @@ body {
 }
 body {
   background: #f4f4f4;
+  position: relative;
 }
 a,
 i,
 img {
   display: block;
   text-decoration: none;
+}
+input {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: none;
 }
 .navbar {
   height: 44px;
@@ -314,4 +467,53 @@ img {
   line-height: 44px;
   text-align: center;
   color: #fff;
+}
+.my {
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+.my .header-content {
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+.my .header-content input[type='file'] {
+  display: none;
+}
+.my .header-content img {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  border: 4px solid #ccc;
+  border-radius: 999px;
+}
+.my .header-content .name {
+  margin-top: 20px;
+}
+.my .list-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.my .list-block .item-block {
+  width: 40%;
+  background-color: #6ed4bf;
+  color: #fff;
+  line-height: 100px;
+}
+.my .out-block {
+  width: 90%;
+  margin: auto;
+  margin-top: 60px;
+  background-color: #d73920;
+  color: #fff;
+  line-height: 40px;
 }
