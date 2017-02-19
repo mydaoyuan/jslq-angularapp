@@ -1,0 +1,135 @@
+.search_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: @themeColor;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 15px;
+  .fs(16);
+  .cancel {
+    width: 80px;
+    color: @defaultColor;
+    text-align: center;
+  }
+  .search_icon {
+    width: 80px;
+    text-align: center;
+    color: @defaultColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: url('/image/search-active.png') no-repeat center center;
+      background-size: 100% 100%;
+      margin-right: 3px;
+    }
+  }
+  .search_input {
+    width: 180px;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: @defaultColor;
+    input {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 0 10px;
+      .fs(14);
+    }
+  }
+}
+
+.mt-s {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 44px;
+  top: 84px;
+}
+/**
+ * tabbar class
+**/
+.tabbar {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  background: #e7e7e7;
+  .tab_li {
+    width: 33%;
+    .fs(16);
+    color: #676767;
+    text-align: center;
+    line-height: 40px;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    &.active {
+      border-bottom: 2px solid @themeColor;
+      color: @themeColor;
+    }
+    &:nth-child(2) {
+      width: 34%;
+    }
+  }
+}
+
+
+/**
+ * picker class
+**/
+.picker_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .15);
+  z-index: 999;
+  .picker_modal {
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 8px;
+    .picker_inner {
+      max-height: 200px;
+      overflow: scroll;
+      border-radius: 5px;
+      width: 100%;
+      .picker_li {
+        height: 40px;
+        background: #fff;
+        line-height: 40px;
+        text-align: center;
+        .fs(18);
+        color: #8eb3e0;
+        box-sizing: border-box;
+        border-bottom: 1px solid @borderColor;
+      }
+    }
+    .cancel {
+      width: 100%;
+      height: 40px;
+      margin-top: 8px;
+      background: #fff;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 40px;
+      .fs(18);
+      color: #8eb3e0;
+    }
+  }
+}

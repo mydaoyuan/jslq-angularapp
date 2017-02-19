@@ -3,8 +3,9 @@
   <div class="classes">
     <a href="" ng-click="showpositionlist($index);" class="{{$index === isActive ? 'active' : ''}}" ng-repeat="cls in com.positionClass">{{cls.name}}</a>
   </div>
+  <div>{{name}}</div>
   <div class="positions">
-    <div class="position_item" ng-repeat="pos in positionlist">
+    <div class="position_item" ng-repeat="pos in posi">
       <div class="fl">
         <div class="desc">{{pos.name}}</div>
         <div class="time">{{pos.createdDate}}</div>

@@ -8,12 +8,13 @@ angular.module('app').directive('positionClass', [function() {
     scope: {
       com: '=',
       isActive: '=',
-      initial: '='
+      initial: '=',
+      posi: '='
     },
     link: function(scope) {
       scope.showpositionlist = function(idx) {
         scope.isActive = idx;
-        scope.positionlist = scope.com.positionClass[idx].positionList;
+        scope.posi = scope.com.positionClass[idx].positionList;
       }
 
     }

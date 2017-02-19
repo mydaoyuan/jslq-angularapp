@@ -31,6 +31,7 @@ gulp.task('json', function() {
 
 gulp.task('less', function() {
   gulp.src(app.srcPath + 'less/app.less')
+    .pipe($.plumber())
     .pipe($.less())
     .pipe($.autoprefixer())
     .pipe(gulp.dest(app.devPath + 'style'))
@@ -41,6 +42,7 @@ gulp.task('less', function() {
 
 gulp.task('js', function() {
   gulp.src(app.srcPath + 'script/**/*.js')
+    .pipe($.plumber())
     .pipe($.concat('index.js'))
     .pipe(gulp.dest(app.devPath + 'script'))
     .pipe($.uglify())
