@@ -1,8 +1,13 @@
 angular
   .module('app')
-  .controller('myCtrl', function($scope, $http) {
+  .controller('myCtrl', function($scope, $interval) {
     $scope.user = {
-      name: 'tangdy',
-      value: 'heihei'
+      name: '唐道远',
+      value: 'heihei',
+      header: ''
     }
+    // 图片文件储存数组
+    $scope.imgdata = {
+      data: ''
+    };
 })

@@ -5,21 +5,31 @@ angular.module('app', ['ui.router']);
 'usr strict';
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('main', {
-    url: '/main',
-    templateUrl: 'view/main.html',
-    controller: 'mainCtrl'
-  }).state('position', {
-    url: '/position/:id',
-    templateUrl: 'view/position.html',
-    controller: 'positionCtrl'
-  }).state('company', {
-    url: '/company/:id',
-    templateUrl: 'view/company.html',
-    controller: 'companyCtrl'
-  });
 
   $urlRouterProvider.otherwise('main');
+
+  $stateProvider
+    .state('main', {
+      url: '/main',
+      templateUrl: 'view/main.html',
+      controller: 'mainCtrl'
+    })
+    .state('position', {
+      url: '/position/:id',
+      templateUrl: 'view/position.html',
+      controller: 'positionCtrl'
+    })
+    .state('my', {
+      url: '/my',
+      templateUrl: 'view/my.html',
+      controller: 'myCtrl'
+    })
+    .state('company', {
+      url: '/company/:id',
+      templateUrl: 'view/company.html',
+      controller: 'companyCtrl'
+    });
+
 }]);
 
 'use strict';
@@ -43,6 +53,20 @@ angular.module('app').controller('mainCtrl', ['$scope', '$http', function($scope
     $scope.lists = data.data;
   }).catch();
 }])
+
+angular
+  .module('app')
+  .controller('myCtrl', function($scope, $interval) {
+    $scope.user = {
+      name: '唐道远',
+      value: 'heihei',
+      header: ''
+    }
+    // 图片文件储存数组
+    $scope.imgdata = {
+      data: ''
+    };
+})
 
 'use strict';
 
@@ -80,6 +104,26 @@ angular.module('app').directive('company', [function() {
     }
   }
 }]);
+
+angular
+  .module('app')
+  .directive('fileModal', ['readPohotFile', function(readPohotFile) {
+    return {
+      restrict: 'A',
+      scope: {
+        imgdata: '='
+      },
+      link: function(scope, element, attrs) {
+        element.bind('change', function(e) {
+          var file = (e.srcElement || e.target).files[0];
+          readPohotFile.readAsDataUrl(file, scope)
+            .then(function(data) {
+              scope.imgdata.header = data;
+            })
+        })
+      }
+    }
+  }])
 
 'use strict';
 
@@ -170,4 +214,42 @@ angular.module('app').directive('positionInfo', [function() {
       scope.imgPath = scope.isActive ? 'image/star2.png' : 'image/star.png';
     }
   }
+}]);
+
+angular
+  .module('app')
+  .factory('readPohotFile',["$q", function($q) {
+    var onLoad = function(reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.resolve(reader.result);
+            });
+        };
+    };
+
+    var onError = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.reject(reader.result);
+            });
+        };
+    };
+
+    var getReader = function(deferred, scope) {
+        var reader = new FileReader();
+        reader.onload = onLoad(reader, deferred, scope);
+        reader.onerror = onError(reader, deferred, scope);
+        return reader;
+    };
+
+    var readAsDataURL = function (file, scope) {
+        var deferred = $q.defer();
+        var reader = getReader(deferred, scope);
+        reader.readAsDataURL(file);
+        return deferred.promise;
+    };
+
+    return {
+        readAsDataUrl: readAsDataURL  
+    };
 }]);
