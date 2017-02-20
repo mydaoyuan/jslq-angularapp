@@ -10,6 +10,11 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
       templateUrl: 'view/main.html',
       controller: 'mainCtrl'
     })
+    .state('search', {
+      url: '/search',
+      templateUrl: 'view/search.html',
+      controller: 'searchCtrl'
+    })
     .state('position', {
       url: '/position/:id',
       templateUrl: 'view/position.html',
